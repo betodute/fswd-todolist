@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     # Add routes below this line
     resources :users, only: [:create]
+    resources :tasks, only: [:update]
     get    'tasks/:id'                => 'tasks#show'
     get    'tasks'                    => 'tasks#index'
     post   'tasks'                    => 'tasks#create'
@@ -12,4 +13,7 @@ Rails.application.routes.draw do
     put    'tasks/:id/mark_active'    => 'tasks#mark_active'
     delete 'tasks/:id'                => 'tasks#destroy'
   end
+
+  get '*path' => redirect('/')
+  
 end
