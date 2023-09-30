@@ -20,9 +20,9 @@ function deleteTaskById(taskId) {
 function renderTasks(tasks) {
   var htmlString = tasks.map(function(task) {
     return `
-      <div class='col-12 mb-3 p-2 border rounded task' data-id='${task.id}'>
+      <div class='col-12 mb-3 p-2 border rounded d-flex justify-content-between task' data-id='${task.id}'>
         ${task.content}
-        <button class='btn btn-danger btn-sm float-right' data-task-id='${task.id}'>Remove</button>
+        <button class='btn btn-danger btn-sm float-right' data-task-id='${task.id}'>remove</button>
       </div>`;
   }).join('');
 
@@ -61,7 +61,9 @@ function handleFormSubmission(event) {
 }
 
 // Add submit event listener to the form
-$('#addTaskForm').submit(handleFormSubmission);
+$(document).ready(function() {
+  $('#addTaskForm').submit(handleFormSubmission);
+});
 
 // Initial load of tasks
 loadTasks();
