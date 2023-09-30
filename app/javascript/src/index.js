@@ -4,6 +4,7 @@ import {
   indexTasks,
   postTask,
   deleteTask,
+  toggleComplete
 } from "./requests.js";
 
 // Function to delete a task by ID
@@ -19,10 +20,16 @@ function deleteTaskById(taskId) {
 // Function to render tasks
 function renderTasks(tasks) {
   var htmlString = tasks.map(function(task) {
+    // Check if the task is completed
+    var taskClass = task.completed ? 'text-muted' : '';
+
     return `
       <div class='col-12 mb-3 p-2 border rounded d-flex justify-content-between task' data-id='${task.id}'>
-        ${task.content}
-        <button class='btn btn-danger btn-sm float-right' data-task-id='${task.id}'>remove</button>
+        <div>
+          <input type='checkbox' class='toggle-complete' data-task-id='${task.id}' ${task.completed ? 'checked' : ''}>
+          <span class='${taskClass} ml-2'>${task.content}</span>
+        </div>
+        <button class='btn btn-danger btn-sm' data-task-id='${task.id}'>remove</button>
       </div>`;
   }).join('');
 
@@ -33,7 +40,19 @@ function renderTasks(tasks) {
     var taskId = $(this).data('task-id');
     deleteTaskById(taskId); // Call the deleteTaskById function
   });
+
+  // Add change event listener to the checkboxes
+  $('.toggle-complete').change(function() {
+    var taskId = $(this).data('task-id');
+    toggleComplete(taskId); // Call the toggleComplete function
+
+    // Toggle 'text-muted' class immediately
+    var taskText = $(this).siblings('span');
+    taskText.toggleClass('text-muted', this.checked);
+  });
 }
+
+
 
 // Function to load and render tasks
 function loadTasks() {

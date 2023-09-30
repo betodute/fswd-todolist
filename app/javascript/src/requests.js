@@ -33,7 +33,18 @@ export var postTask = function (content, successCB, errorCB) {
   $.ajax(request);
 };
 
+export var toggleComplete = function (taskId, isChecked, successCB, errorCB) {
+  var endpoint = isChecked ? 'mark_complete' : 'mark_active';
 
+  var request = {
+    type: 'PUT',
+    url: `api/tasks/${taskId}/${endpoint}?api_key=1`,
+    success: successCB,
+    error: errorCB
+  }
+
+  $.ajax(request);
+};
 
 export var deleteTask = function (taskId, successCB, errorCB) {
   var request = {
