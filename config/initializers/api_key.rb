@@ -1,1 +1,1 @@
-API_KEY = Rails.application.credentials(:api_key)
+API_KEY = Rails.application.credentials.dig(:api_key)
