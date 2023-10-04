@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { API_KEY } from '../config/initializers/api_key';
 
 $.ajaxSetup({
   headers: {
@@ -6,16 +7,10 @@ $.ajaxSetup({
   }
 });
 
-// Function to fetch the API key from Rails credentials
-const getApiKey = () => {
-  // Modify 'production' to match the environment for which you stored the API key
-  return '<%= Rails.application.credentials.production[:api_key] %>';
-};
-
 export var indexTasks = function (successCB, errorCB) {
   var request = {
     type: 'GET',
-    url: `api/tasks?api_key=${getApiKey()}`,
+    url: `api/tasks?api_key=${API_KEY}`,
     success: successCB,
     error: errorCB
   };
@@ -26,7 +21,7 @@ export var indexTasks = function (successCB, errorCB) {
 export var postTask = function (content, successCB, errorCB) {
   var request = {
     type: 'POST',
-    url: `api/tasks?api_key=${getApiKey()}`,
+    url: `api/tasks?api_key=${API_KEY}`,
     data: {
       task: {
         content: content
@@ -44,7 +39,7 @@ export var toggleComplete = function (taskId, isChecked, successCB, errorCB) {
 
   var request = {
     type: 'PUT',
-    url: `api/tasks/${taskId}/${endpoint}?api_key=${getApiKey()}`,
+    url: `api/tasks/${taskId}/${endpoint}?api_key=${API_KEY}`,
     success: successCB,
     error: errorCB
   };
@@ -55,13 +50,14 @@ export var toggleComplete = function (taskId, isChecked, successCB, errorCB) {
 export var deleteTask = function (taskId, successCB, errorCB) {
   var request = {
     type: 'DELETE',
-    url: `api/tasks/${taskId}?api_key=${getApiKey()}`,
+    url: `api/tasks/${taskId}?api_key=${API_KEY}`,
     success: successCB,
     error: errorCB
   };
 
   $.ajax(request);
 };
+
 
 
 
