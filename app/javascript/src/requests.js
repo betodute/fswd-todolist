@@ -9,7 +9,7 @@ $.ajaxSetup({
 export var indexTasks = function (successCB, errorCB) {
   var request = {
     type: 'GET',
-    url: `api/tasks?api_key=1`,
+    url: `api/tasks?api_key=`,
     success: successCB,
     error: errorCB
   };
