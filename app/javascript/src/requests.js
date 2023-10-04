@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import { API_KEY } from '../config/initializers/api_key';
 
 $.ajaxSetup({
   headers: {
@@ -10,7 +9,7 @@ $.ajaxSetup({
 export var indexTasks = function (successCB, errorCB) {
   var request = {
     type: 'GET',
-    url: `api/tasks?api_key=${API_KEY}`,
+    url: `api/tasks?api_key=1`,
     success: successCB,
     error: errorCB
   };
@@ -21,7 +20,7 @@ export var indexTasks = function (successCB, errorCB) {
 export var postTask = function (content, successCB, errorCB) {
   var request = {
     type: 'POST',
-    url: `api/tasks?api_key=${API_KEY}`,
+    url: `api/tasks?api_key=1`,
     data: {
       task: {
         content: content
@@ -39,7 +38,7 @@ export var toggleComplete = function (taskId, isChecked, successCB, errorCB) {
 
   var request = {
     type: 'PUT',
-    url: `api/tasks/${taskId}/${endpoint}?api_key=${API_KEY}`,
+    url: `api/tasks/${taskId}/${endpoint}?api_key=1`,
     success: successCB,
     error: errorCB
   };
@@ -50,7 +49,7 @@ export var toggleComplete = function (taskId, isChecked, successCB, errorCB) {
 export var deleteTask = function (taskId, successCB, errorCB) {
   var request = {
     type: 'DELETE',
-    url: `api/tasks/${taskId}?api_key=${API_KEY}`,
+    url: `api/tasks/${taskId}?api_key=1`,
     success: successCB,
     error: errorCB
   };
